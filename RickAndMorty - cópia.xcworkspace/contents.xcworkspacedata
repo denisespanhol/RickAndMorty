@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "container:../NetworkKit">
+   </FileRef>
+   <FileRef
+      location = "container:../DSM">
+   </FileRef>
+   <FileRef
+      location = "container:../LoginModule">
+   </FileRef>
+   <FileRef
+      location = "container:Rick-and-Morty-App/Rick-and-Morty-App.xcodeproj">
+   </FileRef>
+</Workspace>
