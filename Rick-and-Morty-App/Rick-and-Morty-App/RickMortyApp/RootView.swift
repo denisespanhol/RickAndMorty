@@ -14,7 +14,7 @@ struct RootView: View {
     
     var body: some View {
         if appState.isLoggedIn {
-            //HomeView()
+            HomeView()
         } else {
             LoginModule.makeLoginView(delegate: LoginDelegate(appState: appState))
         }
