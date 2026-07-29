@@ -14,9 +14,9 @@ struct HomeView: View {
     
     var body: some View {
         TabView {
-            /*CharacterListView()
+            CharacterListView()
                 .tabItem { Label("Characters", systemImage: "person.2.fill") }
-             LocationListView()
+             /*LocationListView()
                  .tabItem { Label("Locations", systemImage: "map.fill") }
              
              EpisodeListView()
