@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		981683D5301A365C00B97219 /* DSM in Frameworks */ = {isa = PBXBuildFile; productRef = 981683D4301A365C00B97219 /* DSM */; };
+		981683D7301A366000B97219 /* LoginModule in Frameworks */ = {isa = PBXBuildFile; productRef = 981683D6301A366000B97219 /* LoginModule */; };
+		981683D9301A366300B97219 /* NetworkKit in Frameworks */ = {isa = PBXBuildFile; productRef = 981683D8301A366300B97219 /* NetworkKit */; };
 		9884D2233018DE760021C638 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9884D2223018DE760021C638 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
@@ -27,7 +30,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				981683D9301A366300B97219 /* NetworkKit in Frameworks */,
+				981683D7301A366000B97219 /* LoginModule in Frameworks */,
 				9884D2233018DE760021C638 /* FirebaseAuth in Frameworks */,
+				981683D5301A365C00B97219 /* DSM in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +85,9 @@
 			name = "Rick-and-Morty-App";
 			packageProductDependencies = (
 				9884D2223018DE760021C638 /* FirebaseAuth */,
+				981683D4301A365C00B97219 /* DSM */,
+				981683D6301A366000B97219 /* LoginModule */,
+				981683D8301A366300B97219 /* NetworkKit */,
 			);
 			productName = "Rick-and-Morty-App";
 			productReference = 9839AC76300F9749007B1E89 /* Rick-and-Morty-App.app */;
@@ -362,6 +371,18 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		981683D4301A365C00B97219 /* DSM */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DSM;
+		};
+		981683D6301A366000B97219 /* LoginModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LoginModule;
+		};
+		981683D8301A366300B97219 /* NetworkKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkKit;
+		};
 		9884D2223018DE760021C638 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 986436563018D62B0004E39A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
