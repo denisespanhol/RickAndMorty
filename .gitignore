@@ -1,4 +1,5 @@
 .DS_Store
+Rick-and-Morty-App/Rick-and-Morty-App/.DS_Store
 /.build
 /Packages
 xcuserdata/
@@ -12,3 +13,5 @@ DerivedData/
 *.xcuserstate
 xcuserdata/
 *.xcworkspace/xcshareddata/
+
+Rick-and-Morty-App/Rick-and-Morty-App/RickMortyApp/GoogleService-Info.plist
