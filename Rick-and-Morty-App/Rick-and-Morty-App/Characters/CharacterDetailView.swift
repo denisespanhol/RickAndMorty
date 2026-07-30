@@ -40,7 +40,7 @@ struct CharacterDetailView: View {
                 infoRow(label: "Gender", value: viewModel.character.gender)
                 infoRow(label: "Origin", value: viewModel.originName)
                 infoRow(label: "Location", value: viewModel.locationName)
-                infoRow(label: "Gender", value: viewModel.character.gender)
+                infoRow(label: "Episodes", value: viewModel.episodeCount)
             }
             .padding()
         }
