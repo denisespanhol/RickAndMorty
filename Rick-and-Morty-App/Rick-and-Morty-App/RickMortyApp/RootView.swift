@@ -6,35 +6,37 @@
 //
 
 import SwiftUI
+import Combine
 import LoginModule
 
 struct RootView: View {
-    
+
     @EnvironmentObject private var appState: AppState
-    
+    @StateObject private var loginDelegate = LoginDelegateHolder()
+
     var body: some View {
         if appState.isLoggedIn {
             HomeView()
         } else {
-            LoginModule.makeLoginView(delegate: LoginDelegate(appState: appState))
+            LoginModule.makeLoginView(delegate: loginDelegate)
+                .onAppear {
+                    loginDelegate.appState = appState
+                }
         }
     }
 }
 
-final class LoginDelegate: LoginModuleDelegate {
-    
-    private let appState: AppState
-    
-    init(appState: AppState) {
-        self.appState = appState
-    }
-    
+@MainActor
+final class LoginDelegateHolder: ObservableObject, LoginModuleDelegate {
+
+    var appState: AppState?
+
     func loginDidSucceed() {
         DispatchQueue.main.async {
-            self.appState.isLoggedIn = true
+            self.appState?.isLoggedIn = true
         }
     }
-    
+
     func loginDidFail(error: Error) {
         print("Login failed: \(error.localizedDescription)")
     }
