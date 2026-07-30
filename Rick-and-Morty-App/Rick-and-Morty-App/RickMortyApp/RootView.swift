@@ -36,6 +36,6 @@ final class LoginDelegate: LoginModuleDelegate {
     }
     
     func loginDidFail(error: Error) {
-        print("Login falhou: \(error.localizedDescription)")
+        print("Login failed: \(error.localizedDescription)")
     }
 }
