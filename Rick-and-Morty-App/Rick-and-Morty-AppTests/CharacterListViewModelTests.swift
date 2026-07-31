@@ -29,7 +29,7 @@ final class CharacterListViewModelTests: XCTestCase {
     
     func test_initialState_isIdle() {
         if case .idle = sut.state { } else {
-            XCTFail("Initial state must be .idle")
+            XCTFail("Initial state should be .idle")
         }
     }
     
