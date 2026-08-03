@@ -35,13 +35,32 @@ struct CharacterListView: View {
             DSMLoadingView()
             
         case .success(let characters):
-            List(characters) { character in
-                NavigationLink(destination: CharacterDetailView(character: character)) {
-                    DSMCell(
-                        title: character.name,
-                        subtitle: "\(character.status) · \(character.species)",
-                        imageURL: URL(string: character.image)
-                    )
+            List {
+                ForEach(characters) { character in
+                    NavigationLink(destination: CharacterDetailView(character: character)) {
+                        DSMCell(
+                            title: character.name,
+                            subtitle: "\(character.status) · \(character.species)",
+                            imageURL: URL(string: character.image)
+                        )
+                    }
+                }
+                
+                if viewModel.hasMorePages {
+                    HStack {
+                        Spacer()
+                        if viewModel.isLoadingMore {
+                            ProgressView()
+                        } else {
+                            DSMButton(title: "Load More") {
+                                Task { await viewModel.loadNextBatch() }
+                            }
+                            .frame(maxWidth: 160)
+                        }
+                        Spacer()
+                    }
+                    .listRowSeparator(.hidden)
+                    .padding(.vertical, 8)
                 }
             }
             .listStyle(.plain)

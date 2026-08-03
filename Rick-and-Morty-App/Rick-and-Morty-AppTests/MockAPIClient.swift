@@ -23,7 +23,7 @@ final class MockAPIClient: APIClientProtocol {
         )
     }
     
-    func fetchCharacters() async throws -> APIResponse<Character> {
+    func fetchCharacters(page: Int) async throws -> APIResponse<Character> {
         if let error = errorToThrow { throw error }
         return makeResponse(charactersToReturn)
     }

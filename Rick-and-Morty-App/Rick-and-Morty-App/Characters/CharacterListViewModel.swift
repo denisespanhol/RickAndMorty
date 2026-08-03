@@ -20,6 +20,11 @@ final class CharacterListViewModel: ObservableObject {
     }
     
     @Published private(set) var state: ViewState = .idle
+    @Published private(set) var characters: [Character] = []
+    @Published private(set) var hasMorePages = true
+    @Published private(set) var isLoadingMore = false
+    
+    private var nextPage = 1
     
     private let apiClient: APIClientProtocol
     
@@ -28,13 +33,31 @@ final class CharacterListViewModel: ObservableObject {
     }
     
     func fetchCharacters() async {
+        guard !isLoadingMore else { return }
+        isLoadingMore = true
+        nextPage = 1
+        hasMorePages = true
+        characters = []
         state = .loading
-        
+        await loadBatch()
+    }
+    
+    func loadNextBatch() async {
+        guard hasMorePages, !isLoadingMore else { return }
+        isLoadingMore = true
+        await loadBatch()
+    }
+    
+    private func loadBatch() async {
         do {
-            let response = try await apiClient.fetchCharacters()
-            state = .success(response.results)
+            let response = try await apiClient.fetchCharacters(page: nextPage)
+            characters.append(contentsOf: response.results)
+            nextPage += 1
+            hasMorePages = response.info.next != nil
+            state = .success(characters)
         } catch {
             state = .failure(error.localizedDescription)
         }
+        isLoadingMore = false
     }
 }
