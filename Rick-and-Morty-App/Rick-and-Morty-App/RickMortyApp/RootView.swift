@@ -15,14 +15,17 @@ struct RootView: View {
     @StateObject private var loginDelegate = LoginDelegateHolder()
 
     var body: some View {
-        if appState.isLoggedIn {
-            HomeView()
-        } else {
-            LoginModule.makeLoginView(delegate: loginDelegate)
-                .onAppear {
-                    loginDelegate.appState = appState
-                }
+        Group {
+            if appState.isLoggedIn {
+                HomeView()
+            } else {
+                LoginModule.makeLoginView(delegate: loginDelegate)
+                    .onAppear {
+                        loginDelegate.appState = appState
+                    }
+            }
         }
+        .preferredColorScheme(appState.colorScheme)
     }
 }
 
