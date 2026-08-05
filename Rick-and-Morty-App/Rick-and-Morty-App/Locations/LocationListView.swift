@@ -35,11 +35,12 @@ struct LocationListView: View {
             DSMLoadingView()
             
         case .success(let locations):
-            List(locations) { location in
+            List(Array(locations.enumerated()), id: \.element.id) { index, location in
                 NavigationLink(destination: LocationDetailView(location: location)) {
                     DSMCell(
                         title: location.name,
-                        subtitle: "\(location.type) · \(location.dimension)"
+                        subtitle: "\(location.type) · \(location.dimension)",
+                        placeholderColor: DSMColors.cyclingColor(for: index)
                     )
                 }
             }

@@ -35,11 +35,12 @@ struct EpisodeListView: View {
             DSMLoadingView()
             
         case .success(let episodes):
-            List(episodes) { episode in
+            List(Array(episodes.enumerated()), id: \.element.id) { index, episode in
                 NavigationLink(destination: EpisodeDetailView(episode: episode)) {
                     DSMCell(
                         title: episode.name,
-                        subtitle: "\(episode.episode) · \(episode.airDate)"
+                        subtitle: "\(episode.episode) · \(episode.airDate)",
+                        placeholderColor: DSMColors.cyclingColor(for: index)
                     )
                 }
             }
