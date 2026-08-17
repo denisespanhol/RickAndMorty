@@ -12,6 +12,7 @@ import DSM
 struct EpisodeListView: View {
     
     @StateObject private var viewModel = EpisodeListViewModel()
+    @EnvironmentObject private var appState: AppState
     
     var body: some View {
         NavigationStack {
@@ -19,6 +20,15 @@ struct EpisodeListView: View {
                 content
             }
             .navigationTitle("Episodes")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        appState.colorScheme = appState.colorScheme == .dark ? nil : .dark
+                    } label: {
+                        Image(systemName: appState.colorScheme == .dark ? "sun.max.fill" : "moon.fill")
+                    }
+                }
+            }
         }
         .task {
             await viewModel.fetchEpisodes()

@@ -12,6 +12,7 @@ import DSM
 struct LocationListView: View {
     
     @StateObject private var viewModel = LocationListViewModel()
+    @EnvironmentObject private var appState: AppState
     
     var body: some View {
         NavigationStack {
@@ -19,6 +20,15 @@ struct LocationListView: View {
                 content
             }
             .navigationTitle("Locations")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        appState.colorScheme = appState.colorScheme == .dark ? nil : .dark
+                    } label: {
+                        Image(systemName: appState.colorScheme == .dark ? "sun.max.fill" : "moon.fill")
+                    }
+                }
+            }
         }
         .task {
             await viewModel.fetchLocations()
