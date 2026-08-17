@@ -13,16 +13,19 @@ struct HomeView: View {
     @EnvironmentObject private var appState: AppState
     
     var body: some View {
+        
         TabView {
-            CharacterListView()
-                .tabItem { Label("Characters", systemImage: "person.2.fill") }
+            DSM.DSMTabView(nameLabel: "Characters", systemImage: "person.2.fill") {
+                CharacterListView()
+            }
             
-             LocationListView()
-                 .tabItem { Label("Locations", systemImage: "map.fill") }
-             
-             EpisodeListView()
-                 .tabItem { Label("Episodes", systemImage: "tv.fill") }
+            DSM.DSMTabView(nameLabel: "Locations", systemImage: "map.fill") {
+                LocationListView()
+            }
+            
+            DSM.DSMTabView(nameLabel: "Episodes", systemImage: "tv.fill") {
+                EpisodeListView()
+            }
         }
-        .tint(DSMColors.secondary)
     }
 }
