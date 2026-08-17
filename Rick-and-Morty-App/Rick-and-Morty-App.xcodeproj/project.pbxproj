@@ -180,6 +180,9 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				986436563018D62B0004E39A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				98F286A530332C0B00E0FC84 /* XCLocalSwiftPackageReference "../../DSM" */,
+				98F286A630332C1800E0FC84 /* XCLocalSwiftPackageReference "../../LoginModule" */,
+				98F286A730332C2600E0FC84 /* XCLocalSwiftPackageReference "../../NetworkKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9839AC77300F9749007B1E89 /* Products */;
@@ -493,6 +496,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		98F286A530332C0B00E0FC84 /* XCLocalSwiftPackageReference "../../DSM" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../DSM;
+		};
+		98F286A630332C1800E0FC84 /* XCLocalSwiftPackageReference "../../LoginModule" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../LoginModule;
+		};
+		98F286A730332C2600E0FC84 /* XCLocalSwiftPackageReference "../../NetworkKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../NetworkKit;
+		};
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
 		986436563018D62B0004E39A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
