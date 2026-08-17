@@ -23,5 +23,6 @@ struct HomeView: View {
              EpisodeListView()
                  .tabItem { Label("Episodes", systemImage: "tv.fill") }
         }
+        .tint(DSMColors.secondary)
     }
 }
