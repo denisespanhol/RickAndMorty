@@ -13,20 +13,19 @@ struct CharacterListView: View {
     
     @StateObject private var viewModel = CharacterListViewModel()
     @EnvironmentObject private var appState: AppState
+    let coordinator: CharactersCoordinator
     
     var body: some View {
-        NavigationStack {
-            Group {
-                content
-            }
-            .navigationTitle("Characters")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        appState.colorScheme = appState.colorScheme == .dark ? nil : .dark
-                    } label: {
-                        Image(systemName: appState.colorScheme == .dark ? "sun.max.fill" : "moon.fill")
-                    }
+        Group {
+            content
+        }
+        .navigationTitle("Characters")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    appState.colorScheme = appState.colorScheme == .dark ? nil : .dark
+                } label: {
+                    Image(systemName: appState.colorScheme == .dark ? "sun.max.fill" : "moon.fill")
                 }
             }
         }
@@ -47,13 +46,16 @@ struct CharacterListView: View {
         case .success(let characters):
             List {
                 ForEach(characters) { character in
-                    NavigationLink(destination: CharacterDetailView(character: character)) {
+                    Button {
+                        coordinator.navigate(to: .characterDetail(character))
+                    } label: {
                         DSMCell(
                             title: character.name,
                             subtitle: "\(character.status) · \(character.species)",
                             imageURL: URL(string: character.image)
                         )
                     }
+                    .buttonStyle(.plain)
                 }
                 
                 if viewModel.hasMorePages {

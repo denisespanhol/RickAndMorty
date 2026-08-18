@@ -16,7 +16,7 @@ struct HomeView: View {
         
         TabView {
             DSM.DSMTabView(nameLabel: "Characters", systemImage: "person.2.fill") {
-                CharacterListView()
+                CharactersFlow()
             }
             
             DSM.DSMTabView(nameLabel: "Locations", systemImage: "map.fill") {
