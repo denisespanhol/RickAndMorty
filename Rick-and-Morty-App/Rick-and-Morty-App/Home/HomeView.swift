@@ -27,5 +27,6 @@ struct HomeView: View {
                 EpisodeListView()
             }
         }
+        .tint(DSMColors.secondary)
     }
 }
