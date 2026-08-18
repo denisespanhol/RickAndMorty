@@ -15,12 +15,12 @@ struct CharactersFlow: View {
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             CharacterListView(coordinator: coordinator)
-        }
-        .navigationDestination(for: CharactersCoordinator.Route.self) { route in
-            switch route {
-            case .characterDetail(let character):
-                CharacterDetailView(character: character)
-            }
+                .navigationDestination(for: CharactersCoordinator.Route.self) { route in
+                    switch route {
+                    case .characterDetail(let character):
+                        CharacterDetailView(character: character)
+                    }
+                }
         }
     }
 }
