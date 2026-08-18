@@ -11,36 +11,17 @@ import LoginModule
 
 struct RootView: View {
 
+    @EnvironmentObject private var appCoordinator: AppCoordinator
     @EnvironmentObject private var appState: AppState
-    @StateObject private var loginDelegate = LoginDelegateHolder()
 
     var body: some View {
         Group {
-            if appState.isLoggedIn {
+            if appCoordinator.isLoggedIn {
                 HomeView()
             } else {
-                LoginModule.makeLoginView(delegate: loginDelegate)
-                    .onAppear {
-                        loginDelegate.appState = appState
-                    }
+                LoginModule.makeLoginView(delegate: appCoordinator)
             }
         }
         .preferredColorScheme(appState.colorScheme)
-    }
-}
-
-@MainActor
-final class LoginDelegateHolder: ObservableObject, LoginModuleDelegate {
-
-    var appState: AppState?
-
-    func loginDidSucceed() {
-        DispatchQueue.main.async {
-            self.appState?.isLoggedIn = true
-        }
-    }
-
-    func loginDidFail(error: Error) {
-        print("Login failed: \(error.localizedDescription)")
     }
 }
