@@ -12,6 +12,7 @@ import FirebaseCore
 @main
 struct RickMortyApp: App {
     
+    @StateObject private var appCoordinator = AppCoordinator()
     @StateObject private var appState = AppState()
     
     init() {
@@ -21,6 +22,7 @@ struct RickMortyApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environmentObject(appCoordinator)
                 .environmentObject(appState)
         }
     }
