@@ -13,20 +13,19 @@ struct EpisodeListView: View {
     
     @StateObject private var viewModel = EpisodeListViewModel()
     @EnvironmentObject private var appState: AppState
+    let coordinator: EpisodesCoordinator
     
     var body: some View {
-        NavigationStack {
-            Group {
-                content
-            }
-            .navigationTitle("Episodes")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        appState.colorScheme = appState.colorScheme == .dark ? nil : .dark
-                    } label: {
-                        Image(systemName: appState.colorScheme == .dark ? "sun.max.fill" : "moon.fill")
-                    }
+        Group {
+            content
+        }
+        .navigationTitle("Episodes")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    appState.colorScheme = appState.colorScheme == .dark ? nil : .dark
+                } label: {
+                    Image(systemName: appState.colorScheme == .dark ? "sun.max.fill" : "moon.fill")
                 }
             }
         }
@@ -45,13 +44,18 @@ struct EpisodeListView: View {
             DSMLoadingView()
             
         case .success(let episodes):
-            List(Array(episodes.enumerated()), id: \.element.id) { index, episode in
-                NavigationLink(destination: EpisodeDetailView(episode: episode)) {
-                    DSMCell(
-                        title: episode.name,
-                        subtitle: "\(episode.episode) · \(episode.airDate)",
-                        placeholderColor: DSMColors.cyclingColor(for: index)
-                    )
+            List {
+                ForEach(episodes.indices, id: \.self) { index in
+                    Button {
+                        coordinator.navigate(to: .episodeDetail(episodes[index]))
+                    } label: {
+                        DSMCell(
+                            title: episodes[index].name,
+                            subtitle: "\(episodes[index].episode) · \(episodes[index].airDate)",
+                            placeholderColor: DSMColors.cyclingColor(for: index)
+                        )
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             .listStyle(.plain)

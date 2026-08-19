@@ -24,7 +24,7 @@ struct HomeView: View {
             }
             
             DSM.DSMTabView(nameLabel: "Episodes", systemImage: "tv.fill") {
-                EpisodeListView()
+                EpisodesFlow()
             }
         }
         .tint(DSMColors.secondary)
