@@ -20,7 +20,7 @@ struct HomeView: View {
             }
             
             DSM.DSMTabView(nameLabel: "Locations", systemImage: "map.fill") {
-                LocationListView()
+                LocationsFlow()
             }
             
             DSM.DSMTabView(nameLabel: "Episodes", systemImage: "tv.fill") {

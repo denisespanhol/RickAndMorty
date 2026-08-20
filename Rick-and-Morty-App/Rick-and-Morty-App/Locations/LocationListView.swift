@@ -13,20 +13,19 @@ struct LocationListView: View {
     
     @StateObject private var viewModel = LocationListViewModel()
     @EnvironmentObject private var appState: AppState
+    let coordinator: LocationsCoordinator
     
     var body: some View {
-        NavigationStack {
-            Group {
-                content
-            }
-            .navigationTitle("Locations")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        appState.colorScheme = appState.colorScheme == .dark ? nil : .dark
-                    } label: {
-                        Image(systemName: appState.colorScheme == .dark ? "sun.max.fill" : "moon.fill")
-                    }
+        Group {
+            content
+        }
+        .navigationTitle("Locations")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    appState.colorScheme = appState.colorScheme == .dark ? nil : .dark
+                } label: {
+                    Image(systemName: appState.colorScheme == .dark ? "sun.max.fill" : "moon.fill")
                 }
             }
         }
@@ -45,13 +44,18 @@ struct LocationListView: View {
             DSMLoadingView()
             
         case .success(let locations):
-            List(Array(locations.enumerated()), id: \.element.id) { index, location in
-                NavigationLink(destination: LocationDetailView(location: location)) {
-                    DSMCell(
-                        title: location.name,
-                        subtitle: "\(location.type) · \(location.dimension)",
-                        placeholderColor: DSMColors.cyclingColor(for: index)
-                    )
+            List {
+                ForEach(locations.indices, id: \.self) { index in
+                    Button {
+                        coordinator.navigate(to: .locationDetail(locations[index]))
+                    } label: {
+                        DSMCell(
+                            title: locations[index].name,
+                            subtitle: "\(locations[index].type) · \(locations[index].dimension)",
+                            placeholderColor: DSMColors.cyclingColor(for: index)
+                        )
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             .listStyle(.plain)
